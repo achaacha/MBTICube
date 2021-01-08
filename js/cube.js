@@ -99,21 +99,13 @@ function onMouseMove(e) {
   const cRoDeg = window.getComputedStyle(cubeR);
   let cubeRotDeg = cRoDeg.transform;
 
-  const b1 = document.querySelector('#b');
-  const f1 = document.querySelector('#f');
-  const tT = document.querySelector('#T');
-  const bB = document.querySelector('#B');
-  const rR = document.querySelector('#R');
-  const lL = document.querySelector('#L');
-
   if (!dragging) return;
 
-  b1.classList.remove("trans");
-  f1.classList.remove("trans");
-  tT.classList.remove("trans");
-  bB.classList.remove("trans");
-  rR.classList.remove("trans");
-  lL.classList.remove("trans");
+
+  for (i = 0; i < faces.length; i++) {
+    faces[i].classList.remove("trans");
+    faces[i].classList.add("backgroundH");
+  }
 
   if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
     p1 = {
@@ -256,7 +248,6 @@ function onMouseUp(e) {
     style = faces[i].style;
     tmp = style.transform || style['-webkit-transform'];
     styles[i] = tmp.replace('perspective(32em) ', '');
-
   }
 
   //Reset the window.p0 variable back for scrolling to work
@@ -270,7 +261,7 @@ function onMouseUp(e) {
 
 /*-------------------------------------------------------------
 |                                                              |
-|                      Create Cube                            |
+|                      Create Cube                             |
 |                                                              |
 --------------------------------------------------------------*/
 
@@ -290,9 +281,16 @@ function initializeCube() {
 }
 
 
+/*-------------------------------------------------------------
+|                                                              |
+|                         Notice                               |
+|                                                              |
+--------------------------------------------------------------*/
+
 const notice = document.querySelector('.notice');
 
 const collapse = function() {
+
   const swA = document.querySelector('.spinwrap');
   const swCS = window.getComputedStyle(swA);
   let sw = swCS.animation;
@@ -302,6 +300,8 @@ const collapse = function() {
     swA.style.animation = "15s linear 0s infinite normal none running tossing";
     cube.style.margin = "-25px -50px";
     p = 'perspective(32em)';
+
+    let i, tmp;
 
     for (i = 0; i < faces.length; i++) {
 
@@ -313,6 +313,9 @@ const collapse = function() {
     //do nothing
   }
 
+  window.addEventListener('mousedown', onMouseDown, false);
+  window.addEventListener('mousemove', onMouseMove, false);
+  window.addEventListener('mouseup', onMouseUp, false);
   notice.style.display = "none";
 }
 
@@ -326,9 +329,6 @@ notice.addEventListener('click', collapse);
 
 
 function init() {
-  window.addEventListener('mousedown', onMouseDown, false);
-  window.addEventListener('mouseup', onMouseUp, false);
-  window.addEventListener('mousemove', onMouseMove, false);
 
   window.faces = document.querySelectorAll('.face');
   window.styles = new Array();

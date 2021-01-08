@@ -1,55 +1,4 @@
-/* Cube on a flat 2D Plane
-         ___
- ___ ___|_b_|___
-|_T_|_L_|_B_|_R_|
-        |_f_|
-
-Key:
-T = Top
-L = Left
-B = Bottom
-R = Right
-b = back
-f = front
-
-------------
-Visualization of a single perfect square with applied degree rotation
-  ____
-| ^    | = Rotation on X axis = 0 degree
-| ____ | = Rotation on Y axis = 0 degree
-
-  ____
-|      | = Rotation on X axis = 180 degree
-| v___ | = Rotation on Y axis = 0 degree
-
-  ____
-|    ^ | = Rotation on X axis = 0 degree
-| ____ | = Rotation on Y axis = 180 degree
-
-Left and rights would be on Y axis based on second demonstration?
-Top and Bottoms would be on X axis?
-Face remains in same slot.
-Back would need to do a full rotation via 180 Degree.
-
------------------------
-
-Need 6 divs to represent each face.
-Probably best to stack divs on top of each other via absolute positioning.
-
------------------------
-
-If ALL 6 squares are stacked on each other....
-
-Front MUST = 0
-Therefore Back MUST = 180
-
-*/
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap');
-
-
-/* *{
-  transition: 2s;
-}*/
 
 body {
   height:100vh;
@@ -76,7 +25,7 @@ body {
 
 .notice a {color: #fff;}
 
-.cube, .face {
+.cube, .face, .type {
   position: absolute;
 }
 
@@ -149,46 +98,91 @@ Cube -90
 }
 
 
-.cube div span
+.type, .functions, .MBTICube
 {
-	position: fixed;
 	font-size: 2em;
   color: #fff;
-  height: 50px;
-  width: 50px;
 }
 
-.cube div span:nth-child(1) {
+.MBTICube {
+  position: absolute;
+  margin: auto auto;
+  top: 20%;
+  left: 20%;
+  font-size: 5em;
+}
+
+.functions {
+  position: fixed;
+}
+
+.functions:nth-child(1) {
   left: 0;
   top: 0;
-  /*margin-top: -35px;*/
+  margin-top: -35px;
+  margin-left: -25px;
 }
 
-.cube div span:nth-child(2) {
+.functions:nth-child(2), #ENFP, #ENFJ, #ENTP, #ENTJ {
   right: 0;
   top: 0;
-  /*margin-right: -25px;
-  margin-top: -35px;*/
 }
 
-.cube div span:nth-child(3) {
+.functions:nth-child(2) {
+  margin-right: -20px;
+  margin-top: -35px;
+}
+
+.functions:nth-child(3), #ESTJ, #ESTP, #ESFJ, #ESFP {
   left: 0;
   bottom: 0;
-  /*margin-bottom: -50px;*/
 }
 
-.cube div span:nth-child(4) {
+.functions:nth-child(3) {
+  margin-bottom: -35px;
+  margin-left: -20px;
+}
+
+.functions:nth-child(4), #INFP, #INFJ, #ISFJ, #ISFP {
   right: 0;
   bottom: 0;
-  /*margin-right: -25px;
-  margin-bottom: -50px;*/
 }
-/*
-.cube div:nth-child(n+2) span {
+
+.functions:nth-child(4) {
+  margin-right: -20px;
+  margin-bottom: -35px;
+}
+
+.functions:nth-child(2), .functions:nth-child(3), #T .functions, #B .functions {
   display: none;
 }
-*/
 
+
+.MBTICube span {
+  opacity:0;
+  text-transform:uppercase;
+  animation:fade 400ms ease-in-out forwards;
+}
+
+
+@keyframes fade {
+  0% {
+    top:10px;
+    left:10px;
+    filter:blur(15px);
+    opacity:0;
+  }
+  50% {
+    filter:blur(10px);
+    opacity:0.9;
+  }
+  100% {
+    top:0px;
+    left:0px;
+    filter:blur(0px);
+    opacity:1;
+  }
+}
 
 /* - - - - - Animation - - - - - */
 
@@ -244,15 +238,14 @@ Cube -90
 		-webkit-transform: rotate(-4deg);
 	}
 }
-/*
-@keyframes spinner {
-  from {transform: rotateY(0deg) rotateX(0deg);}
-  to {transform: rotateY(359deg) rotateX(359deg);}
-}*/
-
 
 /*Added classes */
 
 .trans {
   transition: 2s;
+}
+
+.backgroundH {
+  transition-property: opacity;
+  transition-duration: 2s;
 }
