@@ -1,10 +1,11 @@
 # MBTICube
 
 
-Working on: Proper cube rotation
+## Working on: 
+  Design concepts, adding Functions.
 
 
-Things to do
+## Things to do
   - Add Types and Functions
   - Design
   - Info Cloud
