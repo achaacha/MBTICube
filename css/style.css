@@ -44,7 +44,12 @@ Front MUST = 0
 Therefore Back MUST = 180
 
 */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap');
 
+
+/* *{
+  transition: 2s;
+}*/
 
 body {
   height:100vh;
@@ -53,15 +58,26 @@ body {
   position: relative;
 }
 
-.cube-wrapper {
-  margin:auto auto;
+
+.notice {
+  background: rgba(0,0,0,.7);
+  height: 325px;
+  width: 300px;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  text-align: center;
+  position: absolute;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  z-index: 10;
 }
 
 
+.notice a {color: #fff;}
+
 .cube, .face {
   position: absolute;
-  top: 40%; /*20vh */
-  left: 50%;
 }
 
 
@@ -70,17 +86,17 @@ body {
   position: absolute;
   bottom: 60%;
   left: 50%;
-}*/
+}
 
 
-/*Cube 90 deg
+Cube 90 deg
 .cube, .face {
   position: absolute;
   bottom: 60%;
   left: 47.6%;
-}*/
+}
 
-/* cube -90 deg
+ cube -90 deg
 .cube, .face {
   position: absolute;
   top: 47.5%;
@@ -97,20 +113,20 @@ body {
 }
 
 /*Cube 180deg
-/*.cube {
+.cube {
   user-select: none;
   cursor: move;
   transform: rotate(180deg);
-}*/
+}
 
-/*Cube 90
-/*.cube {
+Cube 90
+.cube {
   user-select: none;
   cursor: move;
   transform: rotate(90deg);
-}*/
+}
 
-/*Cube -90
+Cube -90
 .cube {
   user-select: none;
   cursor: move;
@@ -119,14 +135,19 @@ body {
 
 .face {
   box-sizing: border-box;
-  border: solid 1px;
   margin: -8em;
-  width: 20em;
-  height: 20em;
-  background-color: rgba(0,0,0,0.5);
+  width: 25em;
+  height: 25em;
+  background-color: rgba(0,0,0,1);
   opacity: 0.6;
-  box-shadow: 0px 0px 2px #fff;
+  box-shadow: 0px 0px 10px #fff;
 }
+
+.face:hover {
+  background-color: rgba(0,0,0,1);
+  opacity: 1;
+}
+
 
 .cube div span
 {
@@ -169,10 +190,69 @@ body {
 */
 
 
+/* - - - - - Animation - - - - - */
+
+.floatwrap{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform-style: preserve-3d;
+    animation: float 10s infinite cubic-bezier(.5, 0, .5, 1);
+
+}
+
+.spinwrap {
+    transform-style: preserve-3d;
+    animation: spin 30s infinite linear;
+    transition: 2s;
+}
 
 
+@keyframes float{
+    0% {transform: translateY(15px);}
+    50% {transform: translateY(-15px);}
+    100% {transform: translateY(15px);}
+}
+
+@keyframes spin {
+       from{transform: rotateY(0deg);}
+       to{transform: rotateY(-360deg);}
+    }
+
+
+
+@keyframes tossing {
+	0% {
+		transform: rotate(-4deg);
+	}
+	50% {
+		transform: rotate(4deg);
+	}
+	100% {
+		transform: rotate(-4deg);
+	}
+}
+
+@-webkit-keyframes tossing {
+	0% {
+		-webkit-transform: rotate(-4deg);
+	}
+	50% {
+		-webkit-transform: rotate(4deg);
+	}
+	100% {
+		-webkit-transform: rotate(-4deg);
+	}
+}
 /*
 @keyframes spinner {
   from {transform: rotateY(0deg) rotateX(0deg);}
   to {transform: rotateY(359deg) rotateX(359deg);}
 }*/
+
+
+/*Added classes */
+
+.trans {
+  transition: 2s;
+}

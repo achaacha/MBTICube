@@ -99,7 +99,21 @@ function onMouseMove(e) {
   const cRoDeg = window.getComputedStyle(cubeR);
   let cubeRotDeg = cRoDeg.transform;
 
+  const b1 = document.querySelector('#b');
+  const f1 = document.querySelector('#f');
+  const tT = document.querySelector('#T');
+  const bB = document.querySelector('#B');
+  const rR = document.querySelector('#R');
+  const lL = document.querySelector('#L');
+
   if (!dragging) return;
+
+  b1.classList.remove("trans");
+  f1.classList.remove("trans");
+  tT.classList.remove("trans");
+  bB.classList.remove("trans");
+  rR.classList.remove("trans");
+  lL.classList.remove("trans");
 
   if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
     p1 = {
@@ -205,7 +219,6 @@ function onMouseDown(e) {
   let element;
 
   onMouseUp(); // disable if dragging
-
   element = e.target;
   //if (! element.classList.contains('face')) return false;
 
@@ -253,12 +266,6 @@ function onMouseUp(e) {
     'y': 0
 
   };
-
-  const teR = document.querySelector('.b');
-  const teD = window.getComputedStyle(teR);
-  let teRD = teD.transform;
-
-  console.log(teRD);
 }
 
 /*-------------------------------------------------------------
@@ -276,12 +283,40 @@ function initializeCube() {
     if (i >= 4) tmp = 'rotateX(' + Math.pow(-1, i) * 90 + 'deg)';
     tmp += ' translateZ(' + side / 2 + 'px)';
 
-    faces[i].style.transform = p + tmp;
-    faces[i].style['-webkit-transform'] = p + tmp;
+    faces[i].style.transform = 'rotateX(-13.5deg) rotateY(-20.25deg)'+ p + tmp;
+    faces[i].style['-webkit-transform'] ='rotateX(-13.5deg) rotateY(-20.25deg)'+ p + tmp;
     styles.push(tmp);
   }
 }
 
+
+const notice = document.querySelector('.notice');
+
+const collapse = function() {
+  const swA = document.querySelector('.spinwrap');
+  const swCS = window.getComputedStyle(swA);
+  let sw = swCS.animation;
+  const cube = document.querySelector('.cube');
+
+  if (sw == "30s linear 0s infinite normal none running spin") {
+    swA.style.animation = "15s linear 0s infinite normal none running tossing";
+    cube.style.margin = "-25px -50px";
+    p = 'perspective(32em)';
+
+    for (i = 0; i < faces.length; i++) {
+
+      tmp = 'rotateX(0deg) rotateY(0deg)' + styles[i];
+      faces[i].style.transform = p + tmp;
+      faces[i].style['-webkit-transform'] = p + tmp;
+    }
+  } else {
+    //do nothing
+  }
+
+  notice.style.display = "none";
+}
+
+notice.addEventListener('click', collapse);
 
 /*-------------------------------------------------------------
 |                                                              |
@@ -304,7 +339,7 @@ function init() {
   window.unit = 360 / max_amount;
   window.dragging = false;
   window.scrolling = false;
-  window.p = 'perspective(32em)';
+  window.p = 'perspective(0em)';
 
   initializeCube();
 }
