@@ -13,8 +13,8 @@ ready(function(){
 
     if (st > lastScrollTop) {
 
-      //Turn this cube
-      
+      //Rotate cube
+
       let p1, angle, i, tmp;
 
       p1 = {
@@ -32,7 +32,8 @@ ready(function(){
         faces[i].style['-webkit-transform'] = p + tmp;
 
         //Save the state of the style of the cube faces.
-        //This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+        //This ensures that if the user switches
+        //to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
 
         style = faces[i].style;
         const tmpStyle = style.transform || style['-webkit-transform'];
@@ -43,7 +44,8 @@ ready(function(){
     } else if (st == lastScrollTop) {
 
       //do nothing
-      //In IE this is an important condition because there seems to be some instances where the last scrollTop is equal to the new one
+      //In IE this is an important condition because there seems
+      //to be some instances where the last scrollTop is equal to the new one
 
     } else {
 
@@ -64,7 +66,8 @@ ready(function(){
         faces[i].style['-webkit-transform'] = p + tmp;
 
         //Save the state of the style of the cube faces.
-        //This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+        //This ensures that if the user switches
+        //to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
 
         style = faces[i].style;
         const tmpStyle = style.transform || style['-webkit-transform'];
@@ -92,31 +95,104 @@ init();
 function onMouseMove(e) {
   let p1, angle, i, tmp;
 
+  const cubeR = document.querySelector('.cube');
+  const cRoDeg = window.getComputedStyle(cubeR);
+  let cubeRotDeg = cRoDeg.transform;
+
+  console.log(cubeRotDeg);
+
   if (!dragging) return;
 
-  p1 = {
+  if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
+    p1 = {
 
-      'x': e.clientX - p0.x,
-      'y': e.clientY - p0.y
+        'x': e.clientX - p0.x,
+        'y': e.clientY - p0.y
 
-    },
+      },
 
-    angle = {
+      angle = {
 
-      'x': -p1.y * unit,
-      'y': p1.x * unit
+        'x': -p1.y * unit,
+        'y': p1.x * unit
 
-    };
+      };
 
 
-  for (i = 0; i < faces.length; i++) {
+    for (i = 0; i < faces.length; i++) {
 
-    tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-    faces[i].style.transform = p + tmp;
-    faces[i].style['-webkit-transform'] = p + tmp;
+      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+      faces[i].style.transform = p + tmp;
+      faces[i].style['-webkit-transform'] = p + tmp;
 
+    }
+  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' ) {
+    p1 = {
+
+        'x': e.clientX - p0.x,
+        'y': e.clientY - p0.y
+
+      },
+
+      angle = {
+
+        'x': p1.y * unit,
+        'y': -p1.x * unit
+
+      };
+
+
+    for (i = 0; i < faces.length; i++) {
+
+      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+      faces[i].style.transform = p + tmp;
+      faces[i].style['-webkit-transform'] = p + tmp;
+    }
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
+    p1 = {
+
+        'x': e.clientX - p0.x,
+        'y': e.clientY - p0.y
+
+      },
+
+      angle = {
+
+        'x': p1.x * unit,
+        'y': p1.y * unit
+
+      };
+
+
+    for (i = 0; i < faces.length; i++) {
+
+      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+      faces[i].style.transform = p + tmp;
+      faces[i].style['-webkit-transform'] = p + tmp;
+    }
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
+    p1 = {
+
+        'x': e.clientX - p0.x,
+        'y': e.clientY - p0.y
+
+      },
+
+      angle = {
+
+        'x': -p1.x * unit,
+        'y': -p1.y * unit
+
+      };
+
+
+    for (i = 0; i < faces.length; i++) {
+
+      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+      faces[i].style.transform = p + tmp;
+      faces[i].style['-webkit-transform'] = p + tmp;
+    }
   }
-
 }
 
 
@@ -161,7 +237,8 @@ function onMouseUp(e) {
   dragging = false;
 
   //Save the state of the style of the cube faces.
-  //This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+  //This ensures that if users switches to dragging,
+  //then there will be no jumps because all of the transforms will still be correctly applied.
 
   for (i = 0; i < faces.length; i++) {
 
@@ -183,7 +260,7 @@ function onMouseUp(e) {
 
 /*-------------------------------------------------------------
 |                                                              |
-|                      Initialize Cube                         |
+|                      Create Cube                            |
 |                                                              |
 --------------------------------------------------------------*/
 
