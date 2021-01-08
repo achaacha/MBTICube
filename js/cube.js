@@ -1,19 +1,21 @@
 ready(function(){
-  var lastScrollTop = 0;
-  
+  let lastScrollTop = 0;
+
   //Set the initial state of window.p0 so that scrolling works without clicking
   window.p0 = {
     'x': 0,
     'y': 0
   };
 
-  window.scroll(function trucenscroll(event) {
-    var st = this.scrollTop();
-    var sl = this.scrollLeft();
+  window.scroll(function trucenscroll(e) {
+    const st = this.scrollTop();
+    const sl = this.scrollLeft();
+
     if (st > lastScrollTop) {
 
-      //Le cube tourne
-      var p1, angle, i, tmp;
+      //Turn this cube
+      
+      let p1, angle, i, tmp;
 
       p1 = {
           'x': sl - p0.x,
@@ -23,20 +25,29 @@ ready(function(){
           'x': -p1.y * unit,
           'y': p1.x * unit
         };
+
       for (i = 0; i < faces.length; i++) {
         tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
         faces[i].style.transform = p + tmp;
         faces[i].style['-webkit-transform'] = p + tmp;
-        //Save the state of the style of the cube faces. This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+
+        //Save the state of the style of the cube faces.
+        //This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+
         style = faces[i].style;
-        var tmpStyle = style.transform || style['-webkit-transform'];
+        const tmpStyle = style.transform || style['-webkit-transform'];
         styles[i] = tmpStyle.replace('perspective(32em) ', '');
       }
+
+
     } else if (st == lastScrollTop) {
+
       //do nothing
       //In IE this is an important condition because there seems to be some instances where the last scrollTop is equal to the new one
+
     } else {
-      var p1, angle, i, tmp;
+
+      let p1, angle, i, tmp;
       p1 = {
           'x': sl - p0.x,
           'y': st - p0.y
@@ -47,50 +58,77 @@ ready(function(){
         };
 
       for (i = 0; i < faces.length; i++) {
+
         tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
         faces[i].style.transform = p + tmp;
         faces[i].style['-webkit-transform'] = p + tmp;
-        //Save the state of the style of the cube faces. This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+
+        //Save the state of the style of the cube faces.
+        //This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+
         style = faces[i].style;
-        var tmpStyle = style.transform || style['-webkit-transform'];
+        const tmpStyle = style.transform || style['-webkit-transform'];
         styles[i] = tmpStyle.replace('perspective(32em) ', '');
+
       }
+
     }
+
     lastScrollTop = st;
   });
+
 });
 
 
-// END OF UNSURE PART
 
 init();
-//===========================================================
-//			onMouseMove
-//===========================================================
+
+/*-------------------------------------------------------------
+|                                                              |
+|                       On Mouse Move                          |
+|                                                              |
+--------------------------------------------------------------*/
+
 function onMouseMove(e) {
-  var p1, angle, i, tmp;
+  let p1, angle, i, tmp;
 
   if (!dragging) return;
 
   p1 = {
+
       'x': e.clientX - p0.x,
       'y': e.clientY - p0.y
+
     },
+
     angle = {
+
       'x': -p1.y * unit,
       'y': p1.x * unit
+
     };
+
+
   for (i = 0; i < faces.length; i++) {
+
     tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
     faces[i].style.transform = p + tmp;
     faces[i].style['-webkit-transform'] = p + tmp;
+
   }
+
 }
-//===========================================================
-//			onMouseDown
-//===========================================================
+
+
+/*-------------------------------------------------------------
+|                                                              |
+|                       On Mouse Down                          |
+|                                                              |
+--------------------------------------------------------------*/
+
+
 function onMouseDown(e) {
-  var element;
+  let element;
 
   onMouseUp(); // disable if dragging
 
@@ -98,40 +136,60 @@ function onMouseDown(e) {
   //if (! element.classList.contains('face')) return false;
 
   e.preventDefault();
+
   window.p0 = {
+
     'x': e.clientX,
     'y': e.clientY
+
   };
+
   dragging = true;
   return false;
 }
-//===========================================================
-//			onMouseUp
-//===========================================================
+
+/*-------------------------------------------------------------
+|                                                              |
+|                       On Mouse Up                            |
+|                                                              |
+--------------------------------------------------------------*/
+
 function onMouseUp(e) {
-  var i, tmp, style;
+  let i, tmp, style;
 
   if (!dragging) return;
   dragging = false;
 
-  //Save the state of the style of the cube faces. This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+  //Save the state of the style of the cube faces.
+  //This ensures that if you switch to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
+
   for (i = 0; i < faces.length; i++) {
+
     style = faces[i].style;
     tmp = style.transform || style['-webkit-transform'];
     styles[i] = tmp.replace('perspective(32em) ', '');
+
   }
+
   //Reset the window.p0 variable back for scrolling to work
   window.p0 = {
+
     'x': 0,
     'y': 0
+
   };
 
 }
-//=====================================================================
-//			initializeCube
-//=====================================================================
+
+/*-------------------------------------------------------------
+|                                                              |
+|                      Initialize Cube                         |
+|                                                              |
+--------------------------------------------------------------*/
+
+
 function initializeCube() {
-  var i, tmp;
+  let i, tmp;
 
   for (i = 0; i < faces.length; i++) {
     if (i < 4) tmp = 'rotateY(' + i * 90 + 'deg)';
@@ -143,9 +201,15 @@ function initializeCube() {
     styles.push(tmp);
   }
 }
-//=====================================================================
-//			init
-//=====================================================================
+
+
+/*-------------------------------------------------------------
+|                                                              |
+|                          init                                |
+|                                                              |
+--------------------------------------------------------------*/
+
+
 function init() {
   window.addEventListener('mousedown', onMouseDown, false);
   window.addEventListener('mouseup', onMouseUp, false);
