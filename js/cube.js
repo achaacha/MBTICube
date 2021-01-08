@@ -50,7 +50,7 @@ const getMousePos = (e) => {
     var newX = sessionStorage.getItem('cX');
     var newY = sessionStorage.getItem('cY');
 
-    let newRot = `rotateY(${newX}deg) rotateX(${newY}deg)`;
+    let newRot = `rotateY(${rotX}deg) rotateX(${rotY}deg)`;
     cube.style.transform = newRot;
   }
 
