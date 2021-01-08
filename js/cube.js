@@ -99,8 +99,6 @@ function onMouseMove(e) {
   const cRoDeg = window.getComputedStyle(cubeR);
   let cubeRotDeg = cRoDeg.transform;
 
-  console.log(cubeRotDeg);
-
   if (!dragging) return;
 
   if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
@@ -256,6 +254,11 @@ function onMouseUp(e) {
 
   };
 
+  const teR = document.querySelector('.b');
+  const teD = window.getComputedStyle(teR);
+  let teRD = teD.transform;
+
+  console.log(teRD);
 }
 
 /*-------------------------------------------------------------
