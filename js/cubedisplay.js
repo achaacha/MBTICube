@@ -22,6 +22,12 @@ function fadeInText() {
   }
 }
 
+
+/*-------------------------------------------------------------
+|                                                              |
+|                     External Cube Rot                        |
+|                                                              |
+--------------------------------------------------------------*/
 let rotate = 0;
 
 function fcRight() {
@@ -35,10 +41,6 @@ function fcRight() {
   }
 
   cube.style.transform = 'rotate('+ rotate +'deg)';
-
-  const roDeg = window.getComputedStyle(cube);
-  let ubeRotDeg = roDeg.transform;
-  console.log(ubeRotDeg);
 }
 
 function fcLeft() {
@@ -52,10 +54,6 @@ function fcLeft() {
   }
 
   cube.style.transform = 'rotate('+ rotate +'deg)';
-
-  const roDeg = window.getComputedStyle(cube);
-  let ubeRotDeg = roDeg.transform;
-  console.log(ubeRotDeg);
 }
 
 function fcDown() {
@@ -73,10 +71,6 @@ function fcDown() {
   }
 
   cube.style.transform = 'rotate('+ rotate +'deg)';
-
-  const roDeg = window.getComputedStyle(cube);
-  let ubeRotDeg = roDeg.transform;
-  console.log(ubeRotDeg);
 }
 
 function fcUp() {
@@ -94,10 +88,6 @@ function fcUp() {
   }
 
   cube.style.transform = 'rotate('+ rotate +'deg)';
-
-  const roDeg = window.getComputedStyle(cube);
-  let ubeRotDeg = roDeg.transform;
-  console.log(ubeRotDeg);
 }
 
 /*

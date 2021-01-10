@@ -1,4 +1,4 @@
-ready(function(){
+/*ready(function(){
   let lastScrollTop = 0;
 
   //Set the initial state of window.p0 so that scrolling works without clicking
@@ -182,7 +182,7 @@ ready(function(){
     }
     lastScrollTop = st;
   });
-});
+}); */
 
 
 
@@ -193,9 +193,20 @@ init();
 |                       On Mouse Move                          |
 |                                                              |
 --------------------------------------------------------------*/
+let angle, p1, angle1, a1;
+
+angle1 = {
+    'x': null,
+    'y': null
+  };
+
+angle = {
+    'x': 0,
+    'y': 0
+  };
 
 function onMouseMove(e) {
-  let p1, angle, i, tmp;
+  let i, tmp;
   const cubeR = document.querySelector('.cube');
   const cRoDeg = window.getComputedStyle(cubeR);
   let cubeRotDeg = cRoDeg.transform;
@@ -213,9 +224,17 @@ function onMouseMove(e) {
         'y': e.clientY - p0.y
       },
       angle = {
-        'x': -p1.y * unit,
-        'y': p1.x * unit
+        'x': -p1.y * unit + angle1.x,
+        'y':  p1.x * unit + angle1.y
       };
+
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
+    }
 
     for (i = 0; i < faces.length; i++) {
       tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
@@ -230,9 +249,17 @@ function onMouseMove(e) {
         'y': e.clientY - p0.y
       },
       angle = {
-        'x': p1.y * unit,
-        'y': -p1.x * unit
+        'x': p1.y * unit + angle1.x,
+        'y': -p1.x * unit + angle1.y
       };
+
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
+    }
 
     for (i = 0; i < faces.length; i++) {
       tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
@@ -245,14 +272,22 @@ function onMouseMove(e) {
     p1 = {
         'x': e.clientX - p0.x,
         'y': e.clientY - p0.y
-      },
-      angle = {
-        'x': p1.x * unit,
-        'y': p1.y * unit
+    },
+    angle = {
+        'x': p1.x * unit + angle1.x,
+        'y': p1.y * unit + angle1.y
       };
 
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
+    }
+
     for (i = 0; i < faces.length; i++) {
-      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY('+ angle.y + 'deg)' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }
@@ -264,9 +299,17 @@ function onMouseMove(e) {
         'y': e.clientY - p0.y
       },
       angle = {
-        'x': -p1.x * unit,
-        'y': -p1.y * unit
+        'x': -p1.x * unit + angle1.x,
+        'y': -p1.y * unit + angle1.y
       };
+
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
+    }
 
     for (i = 0; i < faces.length; i++) {
       tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
@@ -317,23 +360,17 @@ function onMouseUp(e) {
   if (!dragging) return;
   dragging = false;
 
-  //Save the state of the style of the cube faces.
-  //This ensures that if users switches to dragging,
-  //then there will be no jumps because all of the transforms will still be correctly applied.
+  //Saving angle to stack later
+  angle1 = {
+      'x': angle.x,
+      'y': angle.y
+    };
 
-  for (i = 0; i < faces.length; i++) {
-
-    style = faces[i].style;
-    tmp = style.transform || style['-webkit-transform'];
-    styles[i] = tmp.replace('perspective(32em) ', '');
-  }
 
   //Reset the window.p0 variable back for scrolling to work
   window.p0 = {
-
     'x': 0,
     'y': 0
-
   };
 }
 
@@ -384,7 +421,7 @@ const collapse = function() {
 
     for (i = 0; i < faces.length; i++) {
 
-      tmp = 'rotateX(0deg) rotateY(0deg)' + styles[i];
+      tmp = '' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }

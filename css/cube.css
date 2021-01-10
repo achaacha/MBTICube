@@ -14,6 +14,7 @@
   cursor: auto;
   transform: rotate(0deg);
   transform-style: preserve-3d;
+  transition: .5s;
 }
 
 
