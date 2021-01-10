@@ -8,7 +8,7 @@
 ## Things to do
 
   ### PRIORITY
-  -Design Mouse direction change based on degrees.
+  - Design Mouse direction change based on degrees.
   
   ### To do after
   - Design
