@@ -25,43 +25,79 @@ function fadeInText() {
 let rotate = 0;
 
 function fcRight() {
-  const cube = document.querySelector('.cube');
   rotate = rotate + 90;
+
+  const cube = document.querySelector('.cube');
+  let cubeRotDeg = window.getComputedStyle(cube).transform;
+
+  if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
+    rotate = 0;
+  }
+
   cube.style.transform = 'rotate('+ rotate +'deg)';
 
-  const cRoDeg = window.getComputedStyle(cube);
-  let cubeRotDeg = cRoDeg.transform;
-  console.log(cubeRotDeg);
+  const roDeg = window.getComputedStyle(cube);
+  let ubeRotDeg = roDeg.transform;
+  console.log(ubeRotDeg);
 }
 
 function fcLeft() {
   rotate = rotate - 90;
+
   const cube = document.querySelector('.cube');
+  let cubeRotDeg = window.getComputedStyle(cube).transform;
+
+  if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
+    rotate = 0;
+  }
+
   cube.style.transform = 'rotate('+ rotate +'deg)';
 
-  const cRoDeg = window.getComputedStyle(cube);
-  let cubeRotDeg = cRoDeg.transform;
-  console.log(cubeRotDeg);
+  const roDeg = window.getComputedStyle(cube);
+  let ubeRotDeg = roDeg.transform;
+  console.log(ubeRotDeg);
 }
 
 function fcDown() {
-  rotate = rotate - 180;
+  rotate = rotate + 180;
+
   const cube = document.querySelector('.cube');
+  let cubeRotDeg = window.getComputedStyle(cube).transform;
+
+  if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
+    rotate = 0;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
+    rotate = -270;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
+    rotate = 270;
+  }
+
   cube.style.transform = 'rotate('+ rotate +'deg)';
 
-  const cRoDeg = window.getComputedStyle(cube);
-  let cubeRotDeg = cRoDeg.transform;
-  console.log(cubeRotDeg);
+  const roDeg = window.getComputedStyle(cube);
+  let ubeRotDeg = roDeg.transform;
+  console.log(ubeRotDeg);
 }
 
 function fcUp() {
   rotate = rotate + 180;
+
   const cube = document.querySelector('.cube');
+  let cubeRotDeg = window.getComputedStyle(cube).transform;
+
+  if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
+    rotate = 0;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
+    rotate = -270;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
+    rotate = 270;
+  }
+
   cube.style.transform = 'rotate('+ rotate +'deg)';
 
-  const cRoDeg = window.getComputedStyle(cube);
-  let cubeRotDeg = cRoDeg.transform;
-  console.log(cubeRotDeg);
+  const roDeg = window.getComputedStyle(cube);
+  let ubeRotDeg = roDeg.transform;
+  console.log(ubeRotDeg);
 }
 
 /*

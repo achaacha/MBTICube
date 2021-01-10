@@ -38,7 +38,7 @@ ready(function(){
           faces[i].style['-webkit-transform'] = p + tmp;
         }
 
-      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)') {
+      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' || cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)') {
 
         p1 = {
             'x': e.clientX - p0.x,
@@ -125,7 +125,7 @@ ready(function(){
 
         }
 
-      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' ) {
+      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' || cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' ) {
 
         p1 = {
             'x': e.clientX - p0.x,
@@ -223,7 +223,7 @@ function onMouseMove(e) {
       faces[i].style['-webkit-transform'] = p + tmp;
     }
 
-  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' ) {
+  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'|| cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' ) {
 
     p1 = {
         'x': e.clientX - p0.x,
@@ -240,7 +240,7 @@ function onMouseMove(e) {
       faces[i].style['-webkit-transform'] = p + tmp;
     }
 
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)' ) {
 
     p1 = {
         'x': e.clientX - p0.x,
@@ -257,7 +257,7 @@ function onMouseMove(e) {
       faces[i].style['-webkit-transform'] = p + tmp;
     }
 
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)' ) {
 
     p1 = {
         'x': e.clientX - p0.x,
