@@ -2,11 +2,14 @@
 
 
 ## Working on: 
-  Adding full Functionality.
+  Adding full functionality to cube rotation.
 
 
 ## Things to do
-  - Add Functionality
-  - Add Types and Functions
+
+  ###PRIORITY
+  -Design Mouse direction change based on degrees.
+  
+  ###To do after
   - Design
   - Info Cloud
