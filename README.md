@@ -7,9 +7,9 @@
 
 ## Things to do
 
-  ##PRIORITY
+  ### PRIORITY
   -Design Mouse direction change based on degrees.
   
-  ##To do after
+  ### To do after
   - Design
   - Info Cloud
