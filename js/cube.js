@@ -16,30 +16,81 @@ ready(function(){
       //Rotate cube
 
       let p1, angle, i, tmp;
+      const cubeR = document.querySelector('.cube');
+      const cRoDeg = window.getComputedStyle(cubeR);
+      let cubeRotDeg = cRoDeg.transform;
 
-      p1 = {
-          'x': sl - p0.x,
-          'y': st - p0.y
-        },
-        angle = {
-          'x': -p1.y * unit,
-          'y': p1.x * unit
-        };
+      if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
 
-      for (i = 0; i < faces.length; i++) {
-        tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-        faces[i].style.transform = p + tmp;
-        faces[i].style['-webkit-transform'] = p + tmp;
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+          angle = {
+            'x': -p1.y * unit,
+            'y': p1.x * unit
+          };
 
-        //Save the state of the style of the cube faces.
-        //This ensures that if the user switches
-        //to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
 
-        style = faces[i].style;
-        const tmpStyle = style.transform || style['-webkit-transform'];
-        styles[i] = tmpStyle.replace('perspective(32em) ', '');
+        for (i = 0; i < faces.length; i++) {
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+        }
+
+      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)') {
+
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+          angle = {
+            'x': p1.y * unit,
+            'y': -p1.x * unit
+          };
+
+        for (i = 0; i < faces.length; i++) {
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+        }
+
+      } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
+
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+          angle = {
+            'x': p1.x * unit,
+            'y': p1.y * unit
+          };
+
+        for (i = 0; i < faces.length; i++) {
+
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+        }
+
+      } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
+
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+
+          angle = {
+            'x': -p1.x * unit,
+            'y': -p1.y * unit
+          };
+
+        for (i = 0; i < faces.length; i++) {
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+        }
       }
-
 
     } else if (st == lastScrollTop) {
 
@@ -50,36 +101,87 @@ ready(function(){
     } else {
 
       let p1, angle, i, tmp;
-      p1 = {
-          'x': sl - p0.x,
-          'y': st - p0.y
-        },
-        angle = {
-          'x': -p1.y * unit,
-          'y': p1.x * unit
-        };
+      const cubeR = document.querySelector('.cube');
+      const cRoDeg = window.getComputedStyle(cubeR);
+      let cubeRotDeg = cRoDeg.transform;
 
-      for (i = 0; i < faces.length; i++) {
+      if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
 
-        tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-        faces[i].style.transform = p + tmp;
-        faces[i].style['-webkit-transform'] = p + tmp;
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+          angle = {
+            'x': -p1.y * unit,
+            'y': p1.x * unit
+          };
 
-        //Save the state of the style of the cube faces.
-        //This ensures that if the user switches
-        //to dragging, then there will be no jumps because all of the transforms will still be correctly applied.
 
-        style = faces[i].style;
-        const tmpStyle = style.transform || style['-webkit-transform'];
-        styles[i] = tmpStyle.replace('perspective(32em) ', '');
+        for (i = 0; i < faces.length; i++) {
 
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+
+        }
+
+      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' ) {
+
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+          angle = {
+            'x': p1.y * unit,
+            'y': -p1.x * unit
+          };
+
+
+        for (i = 0; i < faces.length; i++) {
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+        }
+
+      } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
+
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+          angle = {
+            'x': p1.x * unit,
+            'y': p1.y * unit
+          };
+
+
+        for (i = 0; i < faces.length; i++) {
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+        }
+
+      } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
+
+        p1 = {
+            'x': e.clientX - p0.x,
+            'y': e.clientY - p0.y
+          },
+          angle = {
+            'x': -p1.x * unit,
+            'y': -p1.y * unit
+          };
+
+        for (i = 0; i < faces.length; i++) {
+          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+          faces[i].style.transform = p + tmp;
+          faces[i].style['-webkit-transform'] = p + tmp;
+        }
       }
 
     }
-
     lastScrollTop = st;
   });
-
 });
 
 
@@ -94,13 +196,11 @@ init();
 
 function onMouseMove(e) {
   let p1, angle, i, tmp;
-
   const cubeR = document.querySelector('.cube');
   const cRoDeg = window.getComputedStyle(cubeR);
   let cubeRotDeg = cRoDeg.transform;
 
   if (!dragging) return;
-
 
   for (i = 0; i < faces.length; i++) {
     faces[i].classList.remove("trans");
@@ -109,93 +209,71 @@ function onMouseMove(e) {
 
   if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
     p1 = {
-
         'x': e.clientX - p0.x,
         'y': e.clientY - p0.y
-
       },
-
       angle = {
-
         'x': -p1.y * unit,
         'y': p1.x * unit
-
       };
 
-
     for (i = 0; i < faces.length; i++) {
-
       tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
-
     }
-  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' ) {
-    p1 = {
 
+  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' ) {
+
+    p1 = {
         'x': e.clientX - p0.x,
         'y': e.clientY - p0.y
-
       },
-
       angle = {
-
         'x': p1.y * unit,
         'y': -p1.x * unit
-
       };
 
-
     for (i = 0; i < faces.length; i++) {
-
       tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
-    p1 = {
 
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
+
+    p1 = {
         'x': e.clientX - p0.x,
         'y': e.clientY - p0.y
-
       },
-
       angle = {
-
         'x': p1.x * unit,
         'y': p1.y * unit
-
       };
 
-
     for (i = 0; i < faces.length; i++) {
-
       tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
-    p1 = {
 
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
+
+    p1 = {
         'x': e.clientX - p0.x,
         'y': e.clientY - p0.y
-
       },
-
       angle = {
-
         'x': -p1.x * unit,
         'y': -p1.y * unit
-
       };
 
-
     for (i = 0; i < faces.length; i++) {
-
       tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }
+
   }
 }
 
@@ -299,6 +377,7 @@ const collapse = function() {
   if (sw == "30s linear 0s infinite normal none running spin") {
     swA.style.animation = "15s linear 0s infinite normal none running tossing";
     cube.style.margin = "-25px -50px";
+    cube.style.cursor = "move";
     p = 'perspective(32em)';
 
     let i, tmp;

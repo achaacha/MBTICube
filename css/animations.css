@@ -1,0 +1,49 @@
+/*-------------------------------------------------------------
+|                                                              |
+|                     Animation Library                        |
+|                                                              |
+--------------------------------------------------------------*/
+
+@keyframes float{
+    0% {transform: translateY(15px);}
+    50% {transform: translateY(-15px);}
+    100% {transform: translateY(15px);}
+}
+
+@keyframes spin {
+       from{transform: rotateY(0deg);}
+       to{transform: rotateY(-360deg);}
+    }
+
+
+
+@keyframes tossing {
+	0% {
+		transform: rotate(-4deg);
+	}
+	50% {
+		transform: rotate(4deg);
+	}
+	100% {
+		transform: rotate(-4deg);
+	}
+}
+
+@keyframes fade {
+  0% {
+    top:10px;
+    left:10px;
+    filter:blur(15px);
+    opacity:0;
+  }
+  50% {
+    filter:blur(10px);
+    opacity:0.9;
+  }
+  100% {
+    top:0px;
+    left:0px;
+    filter:blur(0px);
+    opacity:1;
+  }
+}

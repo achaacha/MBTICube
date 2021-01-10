@@ -1,0 +1,14 @@
+/*-------------------------------------------------------------
+|                                                              |
+|                     Added Classes                            |
+|                                                              |
+--------------------------------------------------------------*/
+
+.trans {
+  transition: 2s;
+}
+
+.backgroundH {
+  transition-property: opacity;
+  transition-duration: 2s;
+}
