@@ -4,19 +4,15 @@
 |                                                              |
 --------------------------------------------------------------*/
 window.onload = fadeInText();
-
 function fadeInText() {
-
   const type = document.querySelectorAll('.axis');
-  let i, j; //loop variables
+  let i, j;
 
   for(i=0; i<type.length;i++){
-
     const spans = type[i].getElementsByTagName("span");
     type[i].innerHTML = type[i].textContent.replace(/./g,"<span>$&</span>");
 
     for(j=0;j<spans.length;j++){
-
       spans[j].style.animationDelay = j*800+"ms";
     }
   }
@@ -28,13 +24,9 @@ function fadeInText() {
 |                     External Cube Rot                        |
 |                                                              |
 --------------------------------------------------------------*/
-let rotate = 0;
-
 function fcRight() {
   rotate = rotate + 90;
-
-  const cube = document.querySelector('.cube');
-  let cubeRotDeg = window.getComputedStyle(cube).transform;
+  let cubeRotDeg = cRoDeg.transform;
 
   if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
     rotate = 0;
@@ -45,9 +37,7 @@ function fcRight() {
 
 function fcLeft() {
   rotate = rotate - 90;
-
-  const cube = document.querySelector('.cube');
-  let cubeRotDeg = window.getComputedStyle(cube).transform;
+  let cubeRotDeg = cRoDeg.transform;
 
   if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
     rotate = 0;
@@ -58,9 +48,7 @@ function fcLeft() {
 
 function fcDown() {
   rotate = rotate + 180;
-
-  const cube = document.querySelector('.cube');
-  let cubeRotDeg = window.getComputedStyle(cube).transform;
+  let cubeRotDeg = cRoDeg.transform;
 
   if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
     rotate = 0;
@@ -75,9 +63,7 @@ function fcDown() {
 
 function fcUp() {
   rotate = rotate + 180;
-
-  const cube = document.querySelector('.cube');
-  let cubeRotDeg = window.getComputedStyle(cube).transform;
+  let cubeRotDeg = cRoDeg.transform;
 
   if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
     rotate = 0;

@@ -1,5 +1,4 @@
 init();
-
 /*-------------------------------------------------------------
 |                                                              |
 |                       On Mouse Move                          |
@@ -17,12 +16,16 @@ function onMouseMove(e) {
     faces[i].classList.add("backgroundH");
   }
 
+  //Remember: finish if else statement based on cube rot once
+  //full functionality is implemented.
   if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
 
     p1 = {'x': e.clientX - p0.x, 'y': e.clientY - p0.y },
     angle = {'x': -p1.y * unit + angle1.x, 'y':  p1.x * unit + angle1.y },
     absoluteR = {'x': angle.x, 'y': angle.y };
 
+
+    //Return absolute value
     if (angle.x < 0) absoluteR.x = angle.x + 360;
     if (angle.y < 0) absoluteR.y = angle.y + 360;
 
@@ -35,15 +38,19 @@ function onMouseMove(e) {
       p0.x = e.clientX;
     }
 
+
+
+
+
+
     for (i = 0; i < faces.length; i++) {
       tmp = 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg)' + styles[i];
+
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }
   }
 }
-
-
 /*-------------------------------------------------------------
 |                                                              |
 |                       On Mouse Down                          |
@@ -52,12 +59,10 @@ function onMouseMove(e) {
 
 
 function onMouseDown(e) {
-  let element;
+  let element, i;
 
-  onMouseUp(); // disable if dragging
+  onMouseUp(); //disable if dragging
   element = e.target;
-  //if (! element.classList.contains('face')) return false;
-
   e.preventDefault();
 
   window.p0 = {
@@ -78,22 +83,19 @@ function onMouseDown(e) {
 --------------------------------------------------------------*/
 
 function onMouseUp(e) {
-  let i, tmp, style;
+  let i, j, tmp, calY, calX;
 
   if (!dragging) return;
   dragging = false;
 
-  //Saving angle to stack later
-  angle1 = {
-      'x': angle.x,
-      'y': angle.y
-    };
+  angle1 = {'x': angle.x, 'y': angle.y};
 
-  //Reset the window.p0 variable back for scrolling to work
-  window.p0 = {
-    'x': 0,
-    'y': 0
-  };
+  if (absoluteR.x >= 40 && absoluteR.x <= 150 && doOnce || absoluteR.x >= 230 && absoluteR.x <= 310 && doOnce) {
+    for (i = 0; i < faces.length; i++){
+      styles[i] = 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg) ' + styles[i];
+    }
+    angle1 = {'x': 0, 'y': 0};
+  }
 }
 
 /*-------------------------------------------------------------
@@ -104,16 +106,21 @@ function onMouseUp(e) {
 
 
 function initializeCube() {
-  let i, tmp;
+  let i, tmp, calY, calX;
 
   for (i = 0; i < faces.length; i++) {
-    if (i < 4) tmp = 'rotateY(' + i * 90 + 'deg)';
-    if (i >= 4) tmp = 'rotateX(' + Math.pow(-1, i) * 90 + 'deg)';
+    if (i < 4) calY = i * 90; //if (i < 4)
+    if (i >= 4) calX = Math.pow(-1, i) * 90; //if (i >= 4)
+
+    if (i < 4) tmp = 'rotateY(' + calY + 'deg)';
+    if (i >= 4) tmp = 'rotateX(' + calX + 'deg)';
     tmp += ' translateZ(' + side / 2 + 'px)';
 
     faces[i].style.transform = 'rotateX(-13.5deg) rotateY(-20.25deg)'+ p + tmp;
     faces[i].style['-webkit-transform'] ='rotateX(-13.5deg) rotateY(-20.25deg)'+ p + tmp;
     styles.push(tmp);
+    savedx.push(tmp);
+    savedy.push(tmp);
   }
 }
 
@@ -168,7 +175,6 @@ function collapse() {
 
 
 function init() {
-
   window.faces = document.querySelectorAll('.face');
   window.functions = document.querySelectorAll('.face .functions')
   window.cube = document.querySelector('.cube');
@@ -176,6 +182,7 @@ function init() {
 
   window.savedx = new Array();
   window.savedy = new Array();
+  window.positional = new Array();
   window.styles = new Array();
 
   window.cRoDeg = getComputedStyle(cube);
@@ -185,12 +192,15 @@ function init() {
   window.side = parseInt(style.width.split('px')[0], 10);
   window.max_amount = factor * side;
   window.unit = 360 / max_amount;
+  window.rotate = 0;
 
   window.dragging = false;
   window.scrolling = false;
+  window.doOnce = true;
 
   window.p = 'perspective(0em)';
   window.angle = {'x': 0,'y': 0};
+  window.sangle = {'x': 0,'y': 0};
   window.angle1 = {'x': null, 'y': null};
   window.absoluteR = {'x': null, 'y': null};
 
