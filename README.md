@@ -4,7 +4,7 @@
   - Full Cube Face Functionality! (THANK GOD LOL)
 
 ## Working on: 
-  Adding full functionality to cube rotation.
+  Adding full functionality to cube wrapper rotation.
 
 
 ## Things to do
