@@ -1,191 +1,3 @@
-/*ready(function(){
-  let lastScrollTop = 0;
-
-  //Set the initial state of window.p0 so that scrolling works without clicking
-  window.p0 = {
-    'x': 0,
-    'y': 0
-  };
-
-  window.scroll(function trucenscroll(e) {
-    const st = this.scrollTop();
-    const sl = this.scrollLeft();
-
-    if (st > lastScrollTop) {
-
-      //Rotate cube
-
-      let p1, angle, i, tmp;
-      const cubeR = document.querySelector('.cube');
-      const cRoDeg = window.getComputedStyle(cubeR);
-      let cubeRotDeg = cRoDeg.transform;
-
-      if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-          angle = {
-            'x': -p1.y * unit,
-            'y': p1.x * unit
-          };
-
-
-        for (i = 0; i < faces.length; i++) {
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-        }
-
-      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' || cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)') {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-          angle = {
-            'x': p1.y * unit,
-            'y': -p1.x * unit
-          };
-
-        for (i = 0; i < faces.length; i++) {
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-        }
-
-      } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-          angle = {
-            'x': p1.x * unit,
-            'y': p1.y * unit
-          };
-
-        for (i = 0; i < faces.length; i++) {
-
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-        }
-
-      } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-
-          angle = {
-            'x': -p1.x * unit,
-            'y': -p1.y * unit
-          };
-
-        for (i = 0; i < faces.length; i++) {
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-        }
-      }
-
-    } else if (st == lastScrollTop) {
-
-      //do nothing
-      //In IE this is an important condition because there seems
-      //to be some instances where the last scrollTop is equal to the new one
-
-    } else {
-
-      let p1, angle, i, tmp;
-      const cubeR = document.querySelector('.cube');
-      const cRoDeg = window.getComputedStyle(cubeR);
-      let cubeRotDeg = cRoDeg.transform;
-
-      if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-          angle = {
-            'x': -p1.y * unit,
-            'y': p1.x * unit
-          };
-
-
-        for (i = 0; i < faces.length; i++) {
-
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-
-        }
-
-      } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' || cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' ) {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-          angle = {
-            'x': p1.y * unit,
-            'y': -p1.x * unit
-          };
-
-
-        for (i = 0; i < faces.length; i++) {
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-        }
-
-      } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' ) {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-          angle = {
-            'x': p1.x * unit,
-            'y': p1.y * unit
-          };
-
-
-        for (i = 0; i < faces.length; i++) {
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-        }
-
-      } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' ) {
-
-        p1 = {
-            'x': e.clientX - p0.x,
-            'y': e.clientY - p0.y
-          },
-          angle = {
-            'x': -p1.x * unit,
-            'y': -p1.y * unit
-          };
-
-        for (i = 0; i < faces.length; i++) {
-          tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-          faces[i].style.transform = p + tmp;
-          faces[i].style['-webkit-transform'] = p + tmp;
-        }
-      }
-
-    }
-    lastScrollTop = st;
-  });
-}); */
-
-
-
 init();
 
 /*-------------------------------------------------------------
@@ -193,20 +5,16 @@ init();
 |                       On Mouse Move                          |
 |                                                              |
 --------------------------------------------------------------*/
-let angle, p1, angle1, a1;
+let angle, p1, angle1, absoluteR;
 
-angle1 = {
-    'x': null,
-    'y': null
-  };
-
-angle = {
-    'x': 0,
-    'y': 0
-  };
+angle1 = {'x': null, 'y': null};
+angle = {'x': 0,'y': 0};
+absoluteR = {'x': null, 'y': null};
 
 function onMouseMove(e) {
   let i, tmp;
+  const functions = document.querySelectorAll('.face .functions')
+
   const cubeR = document.querySelector('.cube');
   const cRoDeg = window.getComputedStyle(cubeR);
   let cubeRotDeg = cRoDeg.transform;
@@ -226,32 +34,20 @@ function onMouseMove(e) {
       angle = {
         'x': -p1.y * unit + angle1.x,
         'y':  p1.x * unit + angle1.y
-      };
-
-    if (angle.x <= -360 || angle.x >= 360) {
-      angle1.x = null;
-      p0.y = e.clientY;
-    } else if (angle.y <= -360 || angle.y >= 360) {
-      angle1.y = null;
-      p0.x = e.clientX;
-    }
-
-    for (i = 0; i < faces.length; i++) {
-      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-      faces[i].style.transform = p + tmp;
-      faces[i].style['-webkit-transform'] = p + tmp;
-    }
-
-  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'|| cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' ) {
-
-    p1 = {
-        'x': e.clientX - p0.x,
-        'y': e.clientY - p0.y
       },
-      angle = {
-        'x': p1.y * unit + angle1.x,
-        'y': -p1.x * unit + angle1.y
+
+      absoluteR = {
+        'x': angle.x,
+        'y': angle.y
       };
+
+    if (angle.x < 0) {
+      absoluteR.x = angle.x + 360;
+    }
+
+    if (angle.y < 0) {
+      absoluteR.y = angle.y + 360;
+    }
 
     if (angle.x <= -360 || angle.x >= 360) {
       angle1.x = null;
@@ -262,61 +58,10 @@ function onMouseMove(e) {
     }
 
     for (i = 0; i < faces.length; i++) {
-      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
+      tmp = 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg)' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }
-
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)' ) {
-
-    p1 = {
-        'x': e.clientX - p0.x,
-        'y': e.clientY - p0.y
-    },
-    angle = {
-        'x': p1.x * unit + angle1.x,
-        'y': p1.y * unit + angle1.y
-      };
-
-    if (angle.x <= -360 || angle.x >= 360) {
-      angle1.x = null;
-      p0.y = e.clientY;
-    } else if (angle.y <= -360 || angle.y >= 360) {
-      angle1.y = null;
-      p0.x = e.clientX;
-    }
-
-    for (i = 0; i < faces.length; i++) {
-      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY('+ angle.y + 'deg)' + styles[i];
-      faces[i].style.transform = p + tmp;
-      faces[i].style['-webkit-transform'] = p + tmp;
-    }
-
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)' ) {
-
-    p1 = {
-        'x': e.clientX - p0.x,
-        'y': e.clientY - p0.y
-      },
-      angle = {
-        'x': -p1.x * unit + angle1.x,
-        'y': -p1.y * unit + angle1.y
-      };
-
-    if (angle.x <= -360 || angle.x >= 360) {
-      angle1.x = null;
-      p0.y = e.clientY;
-    } else if (angle.y <= -360 || angle.y >= 360) {
-      angle1.y = null;
-      p0.x = e.clientX;
-    }
-
-    for (i = 0; i < faces.length; i++) {
-      tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-      faces[i].style.transform = p + tmp;
-      faces[i].style['-webkit-transform'] = p + tmp;
-    }
-
   }
 }
 
@@ -366,7 +111,6 @@ function onMouseUp(e) {
       'y': angle.y
     };
 
-
   //Reset the window.p0 variable back for scrolling to work
   window.p0 = {
     'x': 0,
@@ -410,6 +154,7 @@ const collapse = function() {
   const swCS = window.getComputedStyle(swA);
   let sw = swCS.animation;
   const cube = document.querySelector('.cube');
+  const functions = document.querySelectorAll('.face .functions')
 
   if (sw == "30s linear 0s infinite normal none running spin") {
     swA.style.animation = "15s linear 0s infinite normal none running tossing";
@@ -417,13 +162,21 @@ const collapse = function() {
     cube.style.cursor = "move";
     p = 'perspective(32em)';
 
-    let i, tmp;
+    let i, tmp, j, h;
 
     for (i = 0; i < faces.length; i++) {
 
       tmp = '' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
+    }
+
+    for (j = 0; j < functions.length; j++){
+      functions[j].classList.add('hide');
+
+      for (h = 0; h < 4; h++){
+        functions[h].classList.remove('hide');
+      }
     }
   } else {
     //do nothing

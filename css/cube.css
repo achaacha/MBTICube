@@ -17,42 +17,6 @@
   transition: .5s;
 }
 
-
-/*Cube upsidedown
-.cube {
-  bottom: 60%;
-  left: 50%;
-}
-
-
-Cube 90 deg
-.cube, .face {
-  bottom: 60%;
-  left: 47.6%;
-}
-
- cube -90 deg
-.cube, .face {
-  top: 47.5%;
-  left: 50%;
-} */
-
-
-/*Cube 180deg
-.cube {
-  transform: rotate(180deg);
-}
-
-Cube 90
-.cube {
-  transform: rotate(90deg);
-}
-
-Cube -90
-.cube {
-  transform: rotate(-90deg);
-}*/
-
 .face {
   box-sizing: border-box;
   margin: -8em;
@@ -123,7 +87,7 @@ Cube -90
   margin-bottom: -35px;
 }
 
-.functions:nth-child(2), .functions:nth-child(3), #T .functions, #B .functions {
+/*.functions:nth-child(2), .functions:nth-child(3), #T .functions, #B .functions {
   display: none;
 }
 

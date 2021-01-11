@@ -12,3 +12,12 @@
   transition-property: opacity;
   transition-duration: 2s;
 }
+
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: '';
+}
