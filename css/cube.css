@@ -18,25 +18,47 @@
 }
 
 .face {
-  box-sizing: border-box;
   margin: -8em;
   width: 25em;
   height: 25em;
-  background-color: rgba(0,0,0,1);
-  opacity: 0.6;
-  box-shadow: 0px 0px 10px #fff;
+  /*background-color: rgba(0,0,0,1);*/
+  opacity: 0.7;
+  /*box-shadow: 0px 0px 10px #fff;*/
+  box-shadow: inset 0 0 30px rgba(0, 0, 255, 0.8);
+  transform-style: preserve-3d;
 }
 
 .face:hover {
-  background-color: rgba(0,0,0,1);
   opacity: 1;
 }
 
+.face:nth-child(1) {
+  background: rgba(255, 0, 0, 0.4);
+}
+
+.face:nth-child(2) {
+  background: rgba(255, 255, 0, 0.4);
+}
+
+.face:nth-child(3) {
+  background: rgba( 0, 255, 0, 0.4);
+}
+
+.face:nth-child(4) {
+  background: rgba( 0, 255, 255, 0.4);
+}
+
+.face:nth-child(5) {
+  background: rgba( 0, 0, 255, 0.4);
+}
+
+.face:nth-child(6) {
+  background: rgba(255, 0, 255, 0.4);
+}
 
 .type, .functions, .axis
 {
 	font-size: 2em;
-  color: #fff;
 }
 
 .axis {
@@ -47,7 +69,8 @@
 }
 
 .functions {
-  position: fixed;
+  position: absolute;
+  transform-style: preserve-3d;
 }
 
 .functions:nth-child(1) {
@@ -85,10 +108,6 @@
 .functions:nth-child(4) {
   margin-right: -20px;
   margin-bottom: -35px;
-}
-
-/*.functions:nth-child(2), .functions:nth-child(3), #T .functions, #B .functions {
-  display: none;
 }
 
 

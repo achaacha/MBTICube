@@ -5,18 +5,19 @@
 
 body {
   height:100vh;
-  background-color: rgba(47,47,47,1);
+  background-color: rgba(255,255,255,1);
   overflow: hidden;
   position: relative;
+  color: rgba(0, 0, 255, 1);
 }
 
 .notice a {color: #fff;}
 
 .notice {
+  color: #fff;
   background: rgba(0,0,0,.7);
   height: 325px;
   width: 300px;
-  color: #fff;
   border-radius: 5px;
   border: 1px solid #fff;
   text-align: center;
