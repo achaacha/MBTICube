@@ -5,18 +5,9 @@ init();
 |                       On Mouse Move                          |
 |                                                              |
 --------------------------------------------------------------*/
-let angle, p1, angle1, absoluteR;
-
-angle1 = {'x': null, 'y': null};
-angle = {'x': 0,'y': 0};
-absoluteR = {'x': null, 'y': null};
 
 function onMouseMove(e) {
-  let i, tmp;
-  const functions = document.querySelectorAll('.face .functions')
-
-  const cubeR = document.querySelector('.cube');
-  const cRoDeg = window.getComputedStyle(cubeR);
+  let i, tmp, p1;
   let cubeRotDeg = cRoDeg.transform;
 
   if (!dragging) return;
@@ -27,27 +18,14 @@ function onMouseMove(e) {
   }
 
   if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
-    p1 = {
-        'x': e.clientX - p0.x,
-        'y': e.clientY - p0.y
-      },
-      angle = {
-        'x': -p1.y * unit + angle1.x,
-        'y':  p1.x * unit + angle1.y
-      },
 
-      absoluteR = {
-        'x': angle.x,
-        'y': angle.y
-      };
+    p1 = {'x': e.clientX - p0.x, 'y': e.clientY - p0.y },
+    angle = {'x': -p1.y * unit + angle1.x, 'y':  p1.x * unit + angle1.y },
+    absoluteR = {'x': angle.x, 'y': angle.y };
 
-    if (angle.x < 0) {
-      absoluteR.x = angle.x + 360;
-    }
+    if (angle.x < 0) absoluteR.x = angle.x + 360;
+    if (angle.y < 0) absoluteR.y = angle.y + 360;
 
-    if (angle.y < 0) {
-      absoluteR.y = angle.y + 360;
-    }
 
     if (angle.x <= -360 || angle.x >= 360) {
       angle1.x = null;
@@ -145,16 +123,10 @@ function initializeCube() {
 |                         Notice                               |
 |                                                              |
 --------------------------------------------------------------*/
-
-const notice = document.querySelector('.notice');
-
-const collapse = function() {
-
+function collapse() {
   const swA = document.querySelector('.spinwrap');
   const swCS = window.getComputedStyle(swA);
   let sw = swCS.animation;
-  const cube = document.querySelector('.cube');
-  const functions = document.querySelectorAll('.face .functions')
 
   if (sw == "30s linear 0s infinite normal none running spin") {
     swA.style.animation = "15s linear 0s infinite normal none running tossing";
@@ -188,8 +160,6 @@ const collapse = function() {
   notice.style.display = "none";
 }
 
-notice.addEventListener('click', collapse);
-
 /*-------------------------------------------------------------
 |                                                              |
 |                          init                                |
@@ -200,15 +170,30 @@ notice.addEventListener('click', collapse);
 function init() {
 
   window.faces = document.querySelectorAll('.face');
+  window.functions = document.querySelectorAll('.face .functions')
+  window.cube = document.querySelector('.cube');
+  window.notice = document.querySelector('.notice');
+
+  window.savedx = new Array();
+  window.savedy = new Array();
   window.styles = new Array();
+
+  window.cRoDeg = getComputedStyle(cube);
   window.style = getComputedStyle(faces[0]);
+
   window.factor = 3;
   window.side = parseInt(style.width.split('px')[0], 10);
   window.max_amount = factor * side;
   window.unit = 360 / max_amount;
+
   window.dragging = false;
   window.scrolling = false;
+
   window.p = 'perspective(0em)';
+  window.angle = {'x': 0,'y': 0};
+  window.angle1 = {'x': null, 'y': null};
+  window.absoluteR = {'x': null, 'y': null};
 
   initializeCube();
+  notice.addEventListener('click', collapse, false);
 }
