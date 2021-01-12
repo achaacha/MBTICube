@@ -1,4 +1,6 @@
 init();
+
+
 /*-------------------------------------------------------------
 |                                                              |
 |                       On Mouse Move                          |
@@ -16,16 +18,14 @@ function onMouseMove(e) {
     faces[i].classList.add("backgroundH");
   }
 
-  //Remember: finish if else statement based on cube rot once
-  //full functionality is implemented.
+
+  p1 = {'x': e.clientX - p0.x, 'y': e.clientY - p0.y };
+
   if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
 
-    p1 = {'x': e.clientX - p0.x, 'y': e.clientY - p0.y },
     angle = {'x': -p1.y * unit + angle1.x, 'y':  p1.x * unit + angle1.y },
     absoluteR = {'x': angle.x, 'y': angle.y };
 
-
-    //Return absolute value
     if (angle.x < 0) absoluteR.x = angle.x + 360;
     if (angle.y < 0) absoluteR.y = angle.y + 360;
 
@@ -38,19 +38,68 @@ function onMouseMove(e) {
       p0.x = e.clientX;
     }
 
+  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'|| cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' ) {
+
+    angle = {'x': p1.y * unit + angle1.x,'y': -p1.x * unit + angle1.y},
+    absoluteR = {'x': angle.x, 'y': angle.y };
+
+    if (angle.x < 0) absoluteR.x = angle.x + 360;
+    if (angle.y < 0) absoluteR.y = angle.y + 360;
 
 
-
-
-
-    for (i = 0; i < faces.length; i++) {
-      tmp = 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg)' + styles[i];
-
-      faces[i].style.transform = p + tmp;
-      faces[i].style['-webkit-transform'] = p + tmp;
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
     }
+
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)' ) {
+
+    angle = {'x': p1.x * unit + angle1.x,'y': p1.y * unit + angle1.y},
+    absoluteR = {'x': angle.x, 'y': angle.y };
+
+    if (angle.x < 0) absoluteR.x = angle.x + 360;
+    if (angle.y < 0) absoluteR.y = angle.y + 360;
+
+
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
+    }
+
+  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)' ) {
+
+    angle = {'x': -p1.x * unit + angle1.x, 'y': -p1.y * unit + angle1.y},
+    absoluteR = {'x': angle.x, 'y': angle.y };
+
+    if (angle.x < 0) absoluteR.x = angle.x + 360;
+    if (angle.y < 0) absoluteR.y = angle.y + 360;
+
+
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
+    }
+
   }
+
+  for (i = 0; i < faces.length; i++) {
+    tmp = 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg)' + styles[i];
+
+    faces[i].style.transform = p + tmp;
+    faces[i].style['-webkit-transform'] = p + tmp;
+  }
+
 }
+
 /*-------------------------------------------------------------
 |                                                              |
 |                       On Mouse Down                          |
@@ -59,17 +108,15 @@ function onMouseMove(e) {
 
 
 function onMouseDown(e) {
-  let element, i;
+  let element;
 
   onMouseUp(); //disable if dragging
   element = e.target;
   e.preventDefault();
 
   window.p0 = {
-
     'x': e.clientX,
     'y': e.clientY
-
   };
 
   dragging = true;
@@ -83,20 +130,69 @@ function onMouseDown(e) {
 --------------------------------------------------------------*/
 
 function onMouseUp(e) {
-  let i, j, tmp, calY, calX;
+  let i;
 
   if (!dragging) return;
   dragging = false;
 
   angle1 = {'x': angle.x, 'y': angle.y};
+  savedeg = {'x': sangle.x, 'y': sangle.y};
 
-  if (absoluteR.x >= 40 && absoluteR.x <= 150 && doOnce || absoluteR.x >= 230 && absoluteR.x <= 310 && doOnce) {
+  if (absoluteR.x >= 40 && absoluteR.x <= 150 || absoluteR.x >= 230 && absoluteR.x <= 310) {
     for (i = 0; i < faces.length; i++){
       styles[i] = 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg) ' + styles[i];
     }
     angle1 = {'x': 0, 'y': 0};
   }
 }
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------
+|                                                                                                           |
+|                Cube Wrapper Rotations                                                                     |
+|                                                                                                           |
+-----------------------------------------------------------------------------------------------------------*/
+
+function start(e) {
+  let height, left, top, width, x, y, _ref;
+  e.preventDefault();
+  _ref = this.getBoundingClientRect(), top = _ref.top, left = _ref.left, height = _ref.height, width = _ref.width;
+  center = {
+    'x': left + (width / 2),
+    'y': top + (height / 2)
+  };
+  x = e.clientX - center.x;
+  y = e.clientY - center.y;
+  startAngle = r2D * Math.atan2(y, x);
+  return active = true;
+}
+
+function rotate2(e) {
+  let d, x, y;
+  e.preventDefault();
+  x = e.clientX - center.x;
+  y = e.clientY - center.y;
+  d = r2D * Math.atan2(y, x);
+  rotation2 = d - startAngle;
+  if (active) {
+    for (i = 0; i < faces.length; i++) {
+      faces[i].style.transform = p + "rotate(" + (angle2 + rotation2) + "deg)" + styles[i];
+    }
+  }
+}
+
+
+function stop() {
+  angle2 += rotation2;
+  return active = false;
+}
+
 
 /*-------------------------------------------------------------
 |                                                              |
@@ -109,8 +205,8 @@ function initializeCube() {
   let i, tmp, calY, calX;
 
   for (i = 0; i < faces.length; i++) {
-    if (i < 4) calY = i * 90; //if (i < 4)
-    if (i >= 4) calX = Math.pow(-1, i) * 90; //if (i >= 4)
+    calY = i * 90; //if (i < 4)
+    calX = Math.pow(-1, i) * 90; //if (i >= 4)
 
     if (i < 4) tmp = 'rotateY(' + calY + 'deg)';
     if (i >= 4) tmp = 'rotateX(' + calX + 'deg)';
@@ -119,8 +215,7 @@ function initializeCube() {
     faces[i].style.transform = 'rotateX(-13.5deg) rotateY(-20.25deg)'+ p + tmp;
     faces[i].style['-webkit-transform'] ='rotateX(-13.5deg) rotateY(-20.25deg)'+ p + tmp;
     styles.push(tmp);
-    savedx.push(tmp);
-    savedy.push(tmp);
+    buStyles.push(tmp);
   }
 }
 
@@ -157,14 +252,9 @@ function collapse() {
         functions[h].classList.remove('hide');
       }
     }
-  } else {
-    //do nothing
   }
 
-  window.addEventListener('mousedown', onMouseDown, false);
-  window.addEventListener('mousemove', onMouseMove, false);
-  window.addEventListener('mouseup', onMouseUp, false);
-  notice.style.display = "none";
+  notice.removeEventListener('click', collapse, false);
 }
 
 /*-------------------------------------------------------------
@@ -178,32 +268,40 @@ function init() {
   window.faces = document.querySelectorAll('.face');
   window.functions = document.querySelectorAll('.face .functions')
   window.cube = document.querySelector('.cube');
-  window.notice = document.querySelector('.notice');
+  window.notice = document.querySelector('.og');
 
-  window.savedx = new Array();
-  window.savedy = new Array();
+  window.buStyles = new Array();
   window.positional = new Array();
   window.styles = new Array();
 
   window.cRoDeg = getComputedStyle(cube);
   window.style = getComputedStyle(faces[0]);
-
   window.factor = 3;
   window.side = parseInt(style.width.split('px')[0], 10);
   window.max_amount = factor * side;
   window.unit = 360 / max_amount;
   window.rotate = 0;
-
   window.dragging = false;
-  window.scrolling = false;
-  window.doOnce = true;
-
+  window.doOnce = false;
+  window.checking = false;
   window.p = 'perspective(0em)';
   window.angle = {'x': 0,'y': 0};
   window.sangle = {'x': 0,'y': 0};
   window.angle1 = {'x': null, 'y': null};
   window.absoluteR = {'x': null, 'y': null};
+  window.sabsoluteR = {'x': null, 'y': null};
 
+  //New shit
+
+  window.active = false;
+  window.angle2 = 0;
+  window.rotation2 = 0;
+  window.startAngle = 0;
+  window.center = {'x': 0, 'y': 0};
+
+
+  window.r2D = 180 / Math.PI;
+  //End of new shit
   initializeCube();
   notice.addEventListener('click', collapse, false);
 }

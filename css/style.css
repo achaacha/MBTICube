@@ -5,19 +5,20 @@
 
 body {
   height:100vh;
-  background-color: rgba(255,255,255,1);
+  background-color: rgba(0,0,0,1);
   overflow: hidden;
   position: relative;
-  color: rgba(0, 0, 255, 1);
+  color: rgba(30,233,221,1);
+  /*color: rgba(0, 0, 255, 0.6);*/
 }
 
 .notice a {color: #fff;}
 
-.notice {
+.notice, .og, .left, .right {
   color: #fff;
   background: rgba(0,0,0,.7);
-  height: 325px;
-  width: 300px;
+  height: auto;
+  width: 350px;
   border-radius: 5px;
   border: 1px solid #fff;
   text-align: center;
@@ -25,10 +26,11 @@ body {
   font-family: 'Manrope', sans-serif;
   font-weight: 500;
   z-index: 10;
+  transition: display 2s;
 }
 
 .button-wrapper {
-  display: flex;
+  display: none;
   /*justify-content: center;*/
   width: 100%;
 }

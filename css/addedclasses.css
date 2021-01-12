@@ -21,20 +21,3 @@
 .show {
   display: '';
 }
-
-.rotateX90 {
-  transform: rotateX(90deg);
-}
-
-.rotateX180 {
-  transform: rotateX(180deg);
-}
-
-.rotateY90 {
-  text-align: center;
-  transform: rotate3d(0, 1, 0, 90deg);
-}
-
-.rotateY180 {
-  transform: rotateY(180deg);
-}

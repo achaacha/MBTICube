@@ -21,64 +21,54 @@ function fadeInText() {
 
 /*-------------------------------------------------------------
 |                                                              |
-|                     External Cube Rot                        |
+|                     Notice                                   |
 |                                                              |
 --------------------------------------------------------------*/
-function fcRight() {
-  rotate = rotate + 90;
-  let cubeRotDeg = cRoDeg.transform;
-
-  if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
-    rotate = 0;
-  }
-
-  cube.style.transform = 'rotate('+ rotate +'deg)';
-}
 
 function fcLeft() {
-  rotate = rotate - 90;
-  let cubeRotDeg = cRoDeg.transform;
-
-  if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
-    rotate = 0;
+  if(!doOnce) {
+    notice.classList.add('hide');
+    document.querySelector('.left').classList.remove('hide');
+    doOnce = true;
   }
 
-  cube.style.transform = 'rotate('+ rotate +'deg)';
-}
-
-function fcDown() {
-  rotate = rotate + 180;
-  let cubeRotDeg = cRoDeg.transform;
-
-  if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
-    rotate = 0;
-  } else if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
-    rotate = -270;
-  } else if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
-    rotate = 270;
+  if (doOnce) {
+    document.querySelector('.left').classList.remove('hide');
+    faces[0].removeEventListener("mousedown", start, false);
+    window.removeEventListener("mousemove", rotate2, false);
+    window.removeEventListener("mouseup", stop, false);
+    document.querySelector('.right').classList.add('hide');
   }
 
-  cube.style.transform = 'rotate('+ rotate +'deg)';
+  cube.addEventListener('mousedown', onMouseDown, false);
+  document.body.addEventListener('mousemove', onMouseMove, false);
+  document.body.addEventListener('mouseup', onMouseUp, false);
 }
 
-function fcUp() {
-  rotate = rotate + 180;
-  let cubeRotDeg = cRoDeg.transform;
 
-  if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
-    rotate = 0;
-  } else if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
-    rotate = -270;
-  } else if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
-    rotate = 270;
+
+
+
+
+
+
+function fcRight() {
+
+  if(!doOnce) {
+    notice.classList.add('hide');
+    document.querySelector('.right').classList.remove('hide');
+    doOnce = true;
   }
 
-  cube.style.transform = 'rotate('+ rotate +'deg)';
-}
+  if(doOnce) {
+    document.querySelector('.right').classList.remove('hide');
+    cube.removeEventListener('mousedown', onMouseDown, false);
+    document.body.removeEventListener('mousemove', onMouseMove, false);
+    document.body.removeEventListener('mouseup', onMouseUp, false);
+    document.querySelector('.left').classList.add('hide');
+  }
 
-/*
-  Left movements: rotate Y 90 degrees
-  Right movements: rotate Y -90 degrees
-  Top movements: rotate X -90
-  Bottom movesments: rotate X 90
-*/
+  faces[0].addEventListener('mousedown', start, false);
+  window.addEventListener('mousemove', rotate2, false);
+  return window.addEventListener('mouseup', stop, false);
+}

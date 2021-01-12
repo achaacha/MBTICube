@@ -191,90 +191,6 @@ ready(function(){
   });
 });
 
-
-/*________________________________________________________________________________________
-
-This is supposed to be attached at the end of the if statement in the mouse drag function
-
-_________________________________________________________________________________________*/
-
-else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'|| cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' ) {
-
-  p1 = {
-      'x': e.clientX - p0.x,
-      'y': e.clientY - p0.y
-    },
-    angle = {
-      'x': p1.y * unit + angle1.x,
-      'y': -p1.x * unit + angle1.y
-    };
-
-  if (angle.x <= -360 || angle.x >= 360) {
-    angle1.x = null;
-    p0.y = e.clientY;
-  } else if (angle.y <= -360 || angle.y >= 360) {
-    angle1.y = null;
-    p0.x = e.clientX;
-  }
-
-  for (i = 0; i < faces.length; i++) {
-    tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-    faces[i].style.transform = p + tmp;
-    faces[i].style['-webkit-transform'] = p + tmp;
-  }
-
-} else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)' ) {
-
-  p1 = {
-      'x': e.clientX - p0.x,
-      'y': e.clientY - p0.y
-  },
-  angle = {
-      'x': p1.x * unit + angle1.x,
-      'y': p1.y * unit + angle1.y
-    };
-
-  if (angle.x <= -360 || angle.x >= 360) {
-    angle1.x = null;
-    p0.x = e.clientX;
-  } else if (angle.y <= -360 || angle.y >= 360) {
-    angle1.y = null;
-    p0.y = e.clientY;
-  }
-
-  for (i = 0; i < faces.length; i++) {
-    tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY('+ angle.y + 'deg)' + styles[i];
-    faces[i].style.transform = p + tmp;
-    faces[i].style['-webkit-transform'] = p + tmp;
-  }
-
-} else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)' ) {
-
-  p1 = {
-      'x': e.clientX - p0.x,
-      'y': e.clientY - p0.y
-    },
-    angle = {
-      'x': -p1.x * unit + angle1.x,
-      'y': -p1.y * unit + angle1.y
-    };
-
-  if (angle.x <= -360 || angle.x >= 360) {
-    angle1.x = null;
-    p0.x = e.clientX;
-  } else if (angle.y <= -360 || angle.y >= 360) {
-    angle1.y = null;
-    p0.y = e.clientY;
-  }
-
-  for (i = 0; i < faces.length; i++) {
-    tmp = 'rotateX(' + angle.x + 'deg)' + ' rotateY(' + angle.y + 'deg)' + styles[i];
-    faces[i].style.transform = p + tmp;
-    faces[i].style['-webkit-transform'] = p + tmp;
-  }
-}
-
-
 /*___________________________________________________________________________
 
 This is supposed to be inside the bottom of the first mouse drag if statement
@@ -354,3 +270,179 @@ if (angle.x <= -230 && angle.x >= -320 || angle.x >= 40 && angle.x <= 137) {
     }
   }
 }
+
+
+
+/*-------------------------------------------------------------
+|                                                              |
+|                      Return String                           |
+|                                                              |
+--------------------------------------------------------------*/
+function adjustRot180(str, num) {
+  if (num > 0)
+    return str.repeat(num);
+  else
+    return "";
+}
+
+
+ //-------------------------------------------------------------------------------
+ //This was inside Mouse Down to accompany the Return String
+
+
+let element, i, str, pos180x, pos180y;
+
+let cubeRotDeg = cRoDeg.transform;
+
+if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)' && doOnce
+  || cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' && doOnce) {
+  doOnce = false;
+  for (i = 0; i < positional.length; i++){
+    pos180x = positional[i].x - 180;
+    pos180y = positional[i].y - 180;
+
+    str = 'rotateX(' + pos180x + 'deg)' + ' rotateY(' + pos180y + 'deg) ';
+
+    console.log(adjustRot180(str, 1));
+  }
+}
+
+
+
+
+/*-------------------------------------------------------------
+|                                                              |
+|                Cube Wrapper Rotations                        |
+|                                                              |
+--------------------------------------------------------------*/
+/*-----------------
+|      Right      |
+-----------------*/
+function fcRight() {
+  let i;
+
+  rotate = rotate + 90;
+  let cubeRotDeg = cRoDeg.transform;
+
+  if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
+    rotate = 0;
+  }
+
+  cube.style.transform = 'rotate('+ rotate +'deg)';
+}
+
+/*-----------------
+|       Left      |
+-----------------*/
+function fcLeft() {
+  let i;
+
+  rotate = rotate - 90;
+  let cubeRotDeg = cRoDeg.transform;
+
+  if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
+    rotate = 0;
+  }
+
+  cube.style.transform = 'rotate('+ rotate +'deg)';
+}
+
+/*-----------------
+|       Down      |
+-----------------*/
+function fcDown() {
+  let i;
+  checking = false;
+
+  rotate = rotate + 180;
+  let cubeRotDeg = cRoDeg.transform;
+
+  if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
+    rotate = 0;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
+    rotate = -270;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
+    rotate = 270;
+  }
+
+  cube.style.transform = 'rotate('+ rotate +'deg)';
+}
+
+/*-----------------
+|       Up        |
+-----------------*/
+function fcUp() {
+  let i;
+
+  rotate = rotate + 180;
+  let cubeRotDeg = cRoDeg.transform;
+
+  if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'){
+    rotate = 0;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)'){
+    rotate = -270;
+  } else if (cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)'){
+    rotate = 270;
+  }
+
+  cube.style.transform = 'rotate('+ rotate +'deg)';
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+//Rotate
+
+function start(e) {
+  let height, left, top, width, x, y, _ref;
+  e.preventDefault();
+  /*_ref = this.getBoundingClientRect(), top = _ref.top, left = _ref.left, height = _ref.height, width = _ref.width;
+  center = {
+    'x': left + (width / 2),
+    'y': top + (height / 2)
+  };
+  x = e.clientX - center.x;
+  y = e.clientY - center.y;
+  startAngle = r2D * Math.atan2(y, x);
+  return active = true;
+}
+
+function rotate(e) {
+  let d, x, y;
+  e.preventDefault();
+  x = e.clientX - center.x;
+  y = e.clientY - center.y;
+  d = r2D * Math.atan2(y, x);
+  rotation2 = d - startAngle;
+  if (active) {
+    return this.style.webkitTransform = "rotate(" + (angle2 + rotation2) + "deg)";
+  }
+}
+
+
+function stop(e) {
+  angle2 += rotation2;
+  return active = false;
+}
+
+//inside init
+
+//New shit
+
+window.active = false;
+window.angle2 = 0;
+window.rotation2 = 0;
+window.startAngle = 0;
+window.center = {'x': 0, 'y': 0};
+
+
+window.r2D = 180 / Math.PI;
+
+cube.addEventListener("mousedown", start, false);
+cube.addEventListener("mousemove", rotate, false);
+cube.addEventListener("mouseup", stop, false);
