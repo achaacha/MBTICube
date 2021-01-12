@@ -4,10 +4,9 @@
   - Full Cube Face Functionality! (THANK GOD LOL)
 
 ## Working on: 
-  - Click and drag face rotation!
   - Tweak cube-wrapper rotation functions.
-  - Clean up junk code based on new rotation system.
-  - Start implenting display ideas based on mathematical algorithm. 
+  - Click and drag face rotation!
+  - Clean up and rework button functions.
 
 
 ## Things to do
@@ -15,8 +14,9 @@
   ### PRIORITY
   - Click and drag face rotation!
   - Clean up junk code based on new rotation system.
-  - Remove any global varibles, functions, or objects.
+  - Remove all globals except essentials.
   
   ### To do after
+  - Start implenting display ideas based on mathematical algorithm. 
   - Design
   - Info Cloud
