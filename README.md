@@ -4,8 +4,9 @@
   - Full Cube Face Functionality! (THANK GOD LOL)
 
 ## Working on: 
+  - Tweak cube-wrapper rotation functions.
   - Clean up junk code based on new rotation system.
-  
+  - Start implenting display ideas based on mathematical algorithm. 
 
 
 ## Things to do
