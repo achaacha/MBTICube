@@ -14,15 +14,21 @@ The purpose of this cube is to demonstrate and educate how the MBTI Functions wo
 
 - Click and drag face rotation!
 
-## Things to do
 
-# PRIORITY
+
+
+
+
+
+# Things to do
+
+## PRIORITY
 - CLICK AND DRAG CUBE IN EVERY ASPECT!!!
 
 - Clean up junk code based on new rotation system.
 - Remove all globals except essentials.
   
-# Less on the ladder
+### Less on the ladder
 - Start implenting display ideas based on mathematical algorithm. 
 - Design
 - Info Cloud
