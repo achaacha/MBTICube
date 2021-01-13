@@ -15,6 +15,9 @@ The purpose of this cube is to demonstrate and educate how the MBTI Functions wo
 - [ ] Start implenting display ideas based on mathematical algorithm. 
 - [ ] Design
 - [ ] Info Cloud
+  - Import youtube API.
+  - Create Xx Grip data
+  - Implement database
   
 
 # Credit
