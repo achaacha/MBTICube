@@ -21,7 +21,7 @@ function onMouseMove(e) {
 
   p1 = {'x': e.clientX - p0.x, 'y': e.clientY - p0.y };
 
-  if (cubeRotDeg == 'matrix(1, 0, 0, 1, 0, 0)') {
+  if (rotation >= 320 || rotation <= 40) {
 
     angle = {'x': -p1.y * unit + angle1.x, 'y':  p1.x * unit + angle1.y },
     absoluteR = {'x': angle.x, 'y': angle.y };
@@ -38,7 +38,28 @@ function onMouseMove(e) {
       p0.x = e.clientX;
     }
 
-  } else if (cubeRotDeg == 'matrix(-1, 1.22465e-16, -1.22465e-16, -1, 0, 0)'|| cubeRotDeg == 'matrix(-1, -1.22465e-16, 1.22465e-16, -1, 0, 0)' ) {
+  }
+
+  if ( rotation <= 319 && rotation >= 220 ) { //rotate left
+
+    angle = {'x': -p1.x * unit + angle1.x,'y': -p1.y * unit + angle1.y},
+    absoluteR = {'x': angle.x, 'y': angle.y };
+
+    if (angle.x < 0) absoluteR.x = angle.x + 360;
+    if (angle.y < 0) absoluteR.y = angle.y + 360;
+
+
+    if (angle.x <= -360 || angle.x >= 360) {
+      angle1.x = null;
+      p0.y = e.clientY;
+    } else if (angle.y <= -360 || angle.y >= 360) {
+      angle1.y = null;
+      p0.x = e.clientX;
+    }
+
+  }
+
+  if (rotation <= 219 && rotation >= 140) { //upside down
 
     angle = {'x': p1.y * unit + angle1.x,'y': -p1.x * unit + angle1.y},
     absoluteR = {'x': angle.x, 'y': angle.y };
@@ -55,26 +76,11 @@ function onMouseMove(e) {
       p0.x = e.clientX;
     }
 
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, 1, -1, -1.83697e-16, 0, 0)' ) {
+  }
 
-    angle = {'x': p1.x * unit + angle1.x,'y': p1.y * unit + angle1.y},
-    absoluteR = {'x': angle.x, 'y': angle.y };
+  if (rotation <= 139 && rotation >= 41) { //rotate right
 
-    if (angle.x < 0) absoluteR.x = angle.x + 360;
-    if (angle.y < 0) absoluteR.y = angle.y + 360;
-
-
-    if (angle.x <= -360 || angle.x >= 360) {
-      angle1.x = null;
-      p0.y = e.clientY;
-    } else if (angle.y <= -360 || angle.y >= 360) {
-      angle1.y = null;
-      p0.x = e.clientX;
-    }
-
-  } else if (cubeRotDeg == 'matrix(6.12323e-17, -1, 1, 6.12323e-17, 0, 0)' || cubeRotDeg == 'matrix(-1.83697e-16, -1, 1, -1.83697e-16, 0, 0)' ) {
-
-    angle = {'x': -p1.x * unit + angle1.x, 'y': -p1.y * unit + angle1.y},
+    angle = {'x': p1.x * unit + angle1.x, 'y': p1.y * unit + angle1.y},
     absoluteR = {'x': angle.x, 'y': angle.y };
 
     if (angle.x < 0) absoluteR.x = angle.x + 360;
@@ -92,7 +98,7 @@ function onMouseMove(e) {
   }
 
   for (i = 0; i < faces.length; i++) {
-    tmp = 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg)' + styles[i];
+    tmp = 'rotate(' + rotation + 'deg)' + 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg)' + styles[i];
 
     faces[i].style.transform = p + tmp;
     faces[i].style['-webkit-transform'] = p + tmp;
@@ -124,7 +130,6 @@ function onMouseUp(e) {
   dragging = false;
 
   angle1 = {'x': angle.x, 'y': angle.y};
-  savedeg = {'x': sangle.x, 'y': sangle.y};
 
   if (absoluteR.x >= 40 && absoluteR.x <= 150 || absoluteR.x >= 230 && absoluteR.x <= 310) {
     for (i = 0; i < faces.length; i++){
@@ -158,27 +163,50 @@ function start(e) {
   x = e.clientX - center.x;
   y = e.clientY - center.y;
   startAngle = r2D * Math.atan2(y, x);
-  return active = true;
+
+  active = true;
+  return false;
 }
 
-function rotate2(e) {
+function rotateZ(e) {
   let d, x, y;
+
+  if (!active) return;
+
+  for (i = 0; i < faces.length; i++) {
+    faces[i].classList.remove("trans");
+    faces[i].classList.add("backgroundH");
+  }
+
   e.preventDefault();
   x = e.clientX - center.x;
   y = e.clientY - center.y;
   d = r2D * Math.atan2(y, x);
-  rotation2 = d - startAngle;
-  if (active) {
-    for (i = 0; i < faces.length; i++) {
-      faces[i].style.transform = p + "rotate(" + (angle2 + rotation2) + "deg)" + styles[i];
+  rotation = d - startAngle + zangle;
+
+  if (rotation < 0) rotation = rotation + 360;
+  if (rotation <= -360 || rotation >= 360) {
+    rotation = rotation - 360;
+  }
+
+  for (i = 0; i < faces.length; i++) {
+    faces[i].style.transform = p + 'rotate(' + rotation + 'deg) ' + 'rotateX(' + absoluteR.x + 'deg)' + ' rotateY(' + absoluteR.y + 'deg) ' + styles[i];
+  }
+
+  if (absoluteR.x >= 40 && absoluteR.x <= 150 || absoluteR.x >= 230 && absoluteR.x <= 310) {
+    for (i = 0; i < faces.length; i++){
+      faces[i].style.transform = p + 'rotate(' + rotation + 'deg) ' + styles[i];
     }
   }
 }
 
 
 function stop() {
-  angle2 += rotation2;
-  return active = false;
+
+  zangle = rotation;
+
+  if (!active) return;
+  active = false;
 }
 
 
@@ -210,7 +238,7 @@ function initializeCube() {
 
 /*-------------------------------------------------------------
 |                                                              |
-|                         Notice                               |
+|                     Cube Transition                          |
 |                                                              |
 --------------------------------------------------------------*/
 function collapse() {
@@ -228,7 +256,7 @@ function collapse() {
 
     for (i = 0; i < faces.length; i++) {
 
-      tmp = '' + styles[i];
+      tmp = 'rotate(' + rotation + 'deg) ' + styles[i];
       faces[i].style.transform = p + tmp;
       faces[i].style['-webkit-transform'] = p + tmp;
     }
@@ -277,18 +305,18 @@ function init() {
   window.checking = false;
   window.p = 'perspective(0em)';
   window.angle = {'x': 0,'y': 0};
-  window.sangle = {'x': 0,'y': 0};
   window.angle1 = {'x': null, 'y': null};
-  window.absoluteR = {'x': null, 'y': null};
-  window.sabsoluteR = {'x': null, 'y': null};
+  window.absoluteR = {'x': 0, 'y': 0};
 
   //New shit
 
   window.active = false;
-  window.angle2 = 0;
-  window.rotation2 = 0;
+  window.zangle = 0;
+  window.rotation = 0;
   window.startAngle = 0;
   window.center = {'x': 0, 'y': 0};
+  window.absoluteZ = 0;
+  window.zangle1 = null;
 
 
   window.r2D = 180 / Math.PI;

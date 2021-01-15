@@ -26,6 +26,7 @@ function fadeInText() {
 --------------------------------------------------------------*/
 
 function fcLeft() {
+  let i;
   if(!doOnce) {
     notice.classList.add('hide');
     document.querySelector('.left').classList.remove('hide');
@@ -34,9 +35,11 @@ function fcLeft() {
 
   if (doOnce) {
     document.querySelector('.left').classList.remove('hide');
-    faces[0].removeEventListener("mousedown", start, false);
-    window.removeEventListener("mousemove", rotate2, false);
-    window.removeEventListener("mouseup", stop, false);
+    for (i = 0; i < faces.length; i++) {
+      faces[i].removeEventListener("mousedown", start, false);
+      window.removeEventListener("mousemove", rotateZ, false);
+      window.removeEventListener("mouseup", stop, false);
+    }
     document.querySelector('.right').classList.add('hide');
   }
 
@@ -53,7 +56,7 @@ function fcLeft() {
 
 
 function fcRight() {
-
+  let i;
   if(!doOnce) {
     notice.classList.add('hide');
     document.querySelector('.right').classList.remove('hide');
@@ -67,8 +70,9 @@ function fcRight() {
     document.body.removeEventListener('mouseup', onMouseUp, false);
     document.querySelector('.left').classList.add('hide');
   }
-
-  faces[0].addEventListener('mousedown', start, false);
-  window.addEventListener('mousemove', rotate2, false);
-  return window.addEventListener('mouseup', stop, false);
+  for (i = 0; i < faces.length; i++) {
+    faces[i].addEventListener('mousedown', start, false);
+    window.addEventListener('mousemove', rotateZ, false);
+    window.addEventListener('mouseup', stop, false);
+  }
 }
