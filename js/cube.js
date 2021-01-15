@@ -3,7 +3,7 @@ init();
 
 /*-------------------------------------------------------------
 |                                                              |
-|                       On Mouse Move                          |
+|                       Face 4x4x4                             |
 |                                                              |
 --------------------------------------------------------------*/
 
@@ -100,13 +100,6 @@ function onMouseMove(e) {
 
 }
 
-/*-------------------------------------------------------------
-|                                                              |
-|                       On Mouse Down                          |
-|                                                              |
---------------------------------------------------------------*/
-
-
 function onMouseDown(e) {
   let element;
 
@@ -123,11 +116,6 @@ function onMouseDown(e) {
   return false;
 }
 
-/*-------------------------------------------------------------
-|                                                              |
-|                       On Mouse Up                            |
-|                                                              |
---------------------------------------------------------------*/
 
 function onMouseUp(e) {
   let i;
@@ -155,7 +143,7 @@ function onMouseUp(e) {
 
 /*----------------------------------------------------------------------------------------------------------
 |                                                                                                           |
-|                Cube Wrapper Rotations                                                                     |
+|                Face Rotation Z Calculations                                                               |
 |                                                                                                           |
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -254,7 +242,8 @@ function collapse() {
     }
   }
 
-  notice.removeEventListener('click', collapse, false);
+  bleft.removeEventListener('click', collapse, false);
+  bright.removeEventListener('click', collapse, false);
 }
 
 /*-------------------------------------------------------------
@@ -269,6 +258,8 @@ function init() {
   window.functions = document.querySelectorAll('.face .functions')
   window.cube = document.querySelector('.cube');
   window.notice = document.querySelector('.og');
+  window.bleft = document.querySelector('.bleft');
+  window.bright = document.querySelector('.bright');
 
   window.buStyles = new Array();
   window.positional = new Array();
@@ -303,5 +294,6 @@ function init() {
   window.r2D = 180 / Math.PI;
   //End of new shit
   initializeCube();
-  notice.addEventListener('click', collapse, false);
+  bleft.addEventListener('click', collapse, false);
+  bright.addEventListener('click', collapse, false);
 }
