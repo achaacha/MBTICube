@@ -11,9 +11,10 @@ The purpose of this cube is to demonstrate and educate how the MBTI Functions wo
 - [x] Full Cube Face Functionality! (THANK GOD LOL)
 - [x] Tweak cube-wrapper rotation functions. (Is fully functional)
 - [ ] Clean up junk code based on new rotation system.
-- [ ] Remove all globals except essentials.
+- [x] Remove all globals except essentials.
 - [ ] Start implenting display ideas based on mathematical algorithm. 
 - [ ] Design
+  - Idea for word rotations: Push absoluteR into an array, for every even number above a certain amount, rotate at certain degree.
 - [ ] Info Cloud
   - Import youtube API.
   - Create Xx Grip data
