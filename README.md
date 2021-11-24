@@ -1,5 +1,7 @@
 # MBTICube
 
+## The Code is BROKEN right now, will update later! :(
+
 ![Image of MBTICube](https://i.redd.it/njjut791bkw01.png)
 
 ## Description
